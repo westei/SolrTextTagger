@@ -68,4 +68,15 @@ public class Tagger2Test extends AbstractTaggerTest {
     assertTags(tmp.toString()+" "+SANFRAN, SANFRAN);
   }
 
+  @Test
+  /** whole matching, no sub-tags */
+  public void testSingleWordPhrases() throws Exception {
+    this.overlaps = "LONGEST_DOMINANT_RIGHT";
+
+    buildNames("Greece", "Athens, Greece");
+
+    assertTags("Greece.", "Greece");
+
+  }
+  
 }

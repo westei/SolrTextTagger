@@ -66,7 +66,7 @@
   </fieldType>
 
   <!-- Used by the PosIncPosLenTaggerTest, demonstrating more complex analysis. -->
-  <fieldType name="tag2" class="solr.TextField" positionIncrementGap="100" >
+  <fieldType name="tag2_" class="solr.TextField" positionIncrementGap="100" >
     <analyzer type="index">
       <tokenizer class="solr.WhitespaceTokenizerFactory"/>
       <!-- enable catenateWords (wi-fi to wifi, wi fi) and preserveOriginal -->
@@ -131,6 +131,25 @@
       <!-- <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/> -->
       <filter class="solr.LowerCaseFilterFactory"/>
     </analyzer>
+  </fieldType>
+  
+  <fieldType name="tag2" class="solr.TextField" positionIncrementGap="100">
+     <analyzer type="index">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory" splitOnCaseChange="0" 
+            splitOnNumerics="0" catenateWords="1" catenateNumbers="1" 
+            catenateAll="1" preserveOriginal="1"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.EnglishMinimalStemFilterFactory"/>
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory" splitOnCaseChange="0" splitOnNumerics="0"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.EnglishMinimalStemFilterFactory"/>
+        <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+      </analyzer>
   </fieldType>
   
  </types>

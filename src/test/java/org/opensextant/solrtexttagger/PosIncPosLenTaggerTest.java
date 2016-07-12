@@ -265,4 +265,16 @@ public class PosIncPosLenTaggerTest extends AbstractTaggerTest {
     assertTags("Season 24 of the Simpsons will be in television next month", "television");
     assertTags("An Internet TV service providing on demand access.", "TV");
   }
+  
+  @Test
+  public void testTest() throws Exception{
+    String text = "Natural medicine 0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203 liquid";
+    this.requestHandler = "/tag2";
+    this.overlaps = "LONGEST_DOMINANT_RIGHT";
+
+    buildNames(text);
+    assertTags("The Natural medicine 0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203 liquid",
+        "Natural medicine 0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203/0.203 liquid");
+  }
+  
 }

@@ -83,6 +83,9 @@ public abstract class Tagger {
     final TagLL[] head = new TagLL[1];
 
     MyFstCursor<Long> cursor = null;
+
+    int lastEndOffset = -1;
+
     //boolean switch used to log warnings in case tokens where skipped during
     //tagging.
     boolean skippedTokens = false; 
@@ -112,7 +115,10 @@ public abstract class Tagger {
           log.trace("  ... ignore token");
           continue;
         }
+      } else if(offsetAtt.startOffset() < lastEndOffset){
+          throw new UnsupportedTokenException("Overlapping Tokens with PosInc > 0");
       }
+      lastEndOffset = offsetAtt.endOffset();
       //-- If PositionIncrement > 1 then finish all tags
 //Deactivated as part of Solr 4.4 upgrade (see Issue-14 for details)
 //      if (posInc > 1) {

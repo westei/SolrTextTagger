@@ -341,6 +341,9 @@ class PhraseBuilder {
    */
   private boolean branch(int termId, int start, int end) {
     int size = phrases.size();
+    if(size > 100){
+        log.info(" > 100 phrases for");
+    }
     tempPhrases.clear(); //need to clear before using
     boolean create = true; //if not a branch create a new phrase
     //we need to create a branch for all phrases starting before the parsed term
